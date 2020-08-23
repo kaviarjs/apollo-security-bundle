@@ -27,26 +27,16 @@ export class ApolloSecurityBundle extends Bundle<IApolloSecurityBundleConfig> {
       websocket: true,
     },
     identifiers: {
-      headers: "kaviar-login-token",
-      cookies: "kaviar-login-token",
-      websocket: "kaviar-login-token",
+      headers: "kaviar-token",
+      cookies: "kaviar-token",
+      websocket: "kaviar-token",
     },
   };
 
   dependencies = [SecurityBundle, ApolloBundle];
 
-  async hook() {
-    const manager = this.get<EventManager>(EventManager);
-
-    // We do this after preparation of ApolloBunde because we are sure then we have the container already registered
-    manager.addListener(
-      BundleAfterPrepareEvent,
-      (e: BundleAfterPrepareEvent) => {
-        if (e.data.bundle instanceof ApolloBundle) {
-          this.loadContextReducer();
-        }
-      }
-    );
+  async prepare() {
+    this.loadContextReducer();
   }
 
   loadContextReducer() {
@@ -95,7 +85,7 @@ export class ApolloSecurityBundle extends Bundle<IApolloSecurityBundleConfig> {
         token = req.headers[identifiers.headers];
       }
 
-      if (!token && support.cookies) {
+      if (!token && support.cookies && req.cookies) {
         token = req.cookies[identifiers.cookies];
       }
     }
