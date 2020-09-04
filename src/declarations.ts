@@ -1,6 +1,6 @@
-import "@kaviar/loader";
+import "@kaviar/graphql-bundle";
 
-declare module "@kaviar/loader" {
+declare module "@kaviar/graphql-bundle" {
   export interface IGraphQLContext {
     /**
      * The userId retrieved from the request. Also verified if the session is valid.

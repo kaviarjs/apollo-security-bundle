@@ -1,6 +1,6 @@
-This bundle is to inject into the context the token read from the request and decoded via the SecurityBundle.
+This is used to detect the userId based on the authentication token and inject it inside the GraphQL's context.
 
-## Installation
+## Install
 
 ```bash
 npm i -S @kaviar/apollo-bundle @kaviar/apollo-security-bundle
@@ -35,7 +35,7 @@ export interface IApolloSecurityBundleConfig {
 `IGraphQLContext` is properly extended by this package:
 
 ```js
-import { IGraphQLContext } from "@kaviar/loader";
+import { IGraphQLContext } from "@kaviar/graphql-bundle";
 
 load({
   resolvers: {

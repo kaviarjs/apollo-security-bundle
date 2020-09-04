@@ -2,10 +2,6 @@ import { Bundle, EventManager, BundleAfterPrepareEvent } from "@kaviar/core";
 import { Loader, ApolloBundle, IGraphQLContext } from "@kaviar/apollo-bundle";
 import { SecurityService, SecurityBundle } from "@kaviar/security-bundle";
 
-export interface ISecurityContext extends IGraphQLContext {
-  userId: null | any;
-}
-
 export interface IApolloSecurityBundleConfig {
   support: {
     headers?: boolean;
