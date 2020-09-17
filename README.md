@@ -12,7 +12,7 @@
 <br />
 <br />
 
-This bundle is to inject into the context the token read from the request and decoded via the SecurityBundle.
+This bundle is to inject into the context the token read from the request and decoded to an userId via the SecurityBundle.
 
 ## Installation
 
