@@ -1,8 +1,7 @@
 {
   "name": "@kaviar/apollo-security-bundle",
   "version": "1.0.0",
-  "private": true,
-  "description": "Injects userId from SecurityBundle into GraphQL Context.",
+  "description": "Get access to currently logged in users through GraphQL context",
   "main": "dist/index.js",
   "repository": {
     "type": "git",
