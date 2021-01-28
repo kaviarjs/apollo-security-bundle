@@ -74,15 +74,17 @@ export class ApolloSecurityBundle extends Bundle<IApolloSecurityBundleConfig> {
     if (connection) {
       if (support.websocket) {
         token =
-          connection?.context?.req?.connectionParams[identifiers.websocket];
+          connection.context?.req?.connectionParams[identifiers.websocket];
       }
     } else {
-      if (support.headers) {
-        token = req.headers[identifiers.headers];
-      }
+      if (req) {
+        if (support.headers) {
+          token = req.headers[identifiers.headers];
+        }
 
-      if (!token && support.cookies && req.cookies) {
-        token = req.cookies[identifiers.cookies];
+        if (!token && support.cookies && req.cookies) {
+          token = req.cookies[identifiers.cookies];
+        }
       }
     }
 
