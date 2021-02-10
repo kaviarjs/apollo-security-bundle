@@ -50,7 +50,14 @@ export class ApolloSecurityBundle extends Bundle<IApolloSecurityBundleConfig> {
             SecurityService
           );
           const session = await securityService.getSession(token);
-          userId = session?.userId;
+          if (!session) {
+            throw new Error("invalid-token");
+          }
+          // We check if the user still exists and is enabled
+          const isEnabled = securityService.isUserEnabled(session.userId);
+          if (isEnabled) {
+            userId = session.userId;
+          }
         }
 
         return {
@@ -69,7 +76,6 @@ export class ApolloSecurityBundle extends Bundle<IApolloSecurityBundleConfig> {
    */
   identifyToken(req, connection) {
     const { support, identifiers } = this.config;
-
     let token;
     if (connection) {
       if (support.websocket) {

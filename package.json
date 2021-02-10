@@ -26,9 +26,11 @@
     "@kaviar/apollo-bundle": "^1.0.0",
     "@kaviar/core": "^1.1.1",
     "@kaviar/graphql-bundle": "^1.0.0",
-    "@kaviar/security-bundle": "^1.0.0"
+    "@kaviar/security-bundle": "^1.0.0",
+    "@kaviar/logger-bundle": "^1.0.0"
   },
   "devDependencies": {
+    "@kaviar/logger-bundle": "^1.0.0",
     "@kaviar/apollo-bundle": "^1.0.0",
     "@kaviar/core": "^1.1.1",
     "@kaviar/graphql-bundle": "^1.0.0",
