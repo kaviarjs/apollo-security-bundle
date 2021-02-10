@@ -1,6 +1,7 @@
 import { Bundle, EventManager, BundleAfterPrepareEvent } from "@kaviar/core";
 import { Loader, ApolloBundle, IGraphQLContext } from "@kaviar/apollo-bundle";
 import { SecurityService, SecurityBundle } from "@kaviar/security-bundle";
+import { ApolloInvalidTokenException } from "./exceptions";
 
 export interface IApolloSecurityBundleConfig {
   support: {
@@ -51,7 +52,7 @@ export class ApolloSecurityBundle extends Bundle<IApolloSecurityBundleConfig> {
           );
           const session = await securityService.getSession(token);
           if (!session) {
-            throw new Error("invalid-token");
+            throw new ApolloInvalidTokenException({ token });
           }
           // We check if the user still exists and is enabled
           const isEnabled = securityService.isUserEnabled(session.userId);
