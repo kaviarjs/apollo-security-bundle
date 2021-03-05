@@ -51,13 +51,14 @@ export class ApolloSecurityBundle extends Bundle<IApolloSecurityBundleConfig> {
             SecurityService
           );
           const session = await securityService.getSession(token);
-          if (!session) {
-            throw new ApolloInvalidTokenException({ token });
-          }
-          // We check if the user still exists and is enabled
-          const isEnabled = await securityService.isUserEnabled(session.userId);
-          if (isEnabled) {
-            userId = session.userId;
+          if (session) {
+            // We check if the user still exists and is enabled
+            const isEnabled = await securityService.isUserEnabled(
+              session.userId
+            );
+            if (isEnabled) {
+              userId = session.userId;
+            }
           }
         }
 
