@@ -2,6 +2,10 @@ import { Bundle, EventManager, BundleAfterPrepareEvent } from "@kaviar/core";
 import { Loader, ApolloBundle, IGraphQLContext } from "@kaviar/apollo-bundle";
 import { SecurityService, SecurityBundle } from "@kaviar/security-bundle";
 import { ApolloInvalidTokenException } from "./exceptions";
+import { PassportService } from "./services/PassportService";
+import { IResolverMap } from "@kaviar/graphql-bundle";
+
+import "@kaviar/apollo-bundle"; // To ensure the IGraphQLContext is extended
 
 export interface IApolloSecurityBundleConfig {
   support: {
@@ -36,8 +40,34 @@ export class ApolloSecurityBundle extends Bundle<IApolloSecurityBundleConfig> {
     this.loadContextReducer();
   }
 
+  async init() {
+    const passportService = this.container.get(PassportService);
+    passportService.init();
+  }
+
+  loadTokenReissue() {
+    const loader = this.container.get(Loader);
+
+    loader.load({
+      typeDefs: `
+        type Mutation {
+          reissueToken(token: String!): String!
+        }
+      `,
+      resolvers: {
+        Mutation: {
+          async reissueToken(_, { token }, ctx) {
+            const securityService = ctx.container.get(SecurityService);
+
+            return securityService.reissueSessionToken(token);
+          },
+        },
+      } as IResolverMap,
+    });
+  }
+
   loadContextReducer() {
-    const loader = this.get<Loader>(Loader);
+    const loader = this.container.get(Loader);
 
     loader.load({
       contextReducers: async (context: IGraphQLContext) => {
