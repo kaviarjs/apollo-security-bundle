@@ -108,11 +108,11 @@ export class ApolloSecurityBundle extends Bundle<IApolloSecurityBundleConfig> {
    */
   identifyToken(req, connection) {
     const { support, identifiers } = this.config;
+
     let token;
     if (connection) {
       if (support.websocket) {
-        token =
-          connection.context?.req?.connectionParams[identifiers.websocket];
+        token = connection.context?.connectionParams[identifiers.websocket];
       }
     } else {
       if (req) {
