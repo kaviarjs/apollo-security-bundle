@@ -23,7 +23,7 @@
   },
   "peerDependencies": {
     "@kaviar/apollo-bundle": "^1.1.8",
-    "@kaviar/core": "^1.1.1",
+    "@kaviar/core": "^1.2.2",
     "@kaviar/graphql-bundle": "^1.0.0",
     "@kaviar/logger-bundle": "^1.0.0",
     "@kaviar/security-bundle": "^1.1.0",

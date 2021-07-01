@@ -89,6 +89,8 @@ export class ApolloSecurityBundle extends Bundle<IApolloSecurityBundleConfig> {
             if (isEnabled) {
               userId = session.userId;
             }
+          } else {
+            throw new ApolloInvalidTokenException({ token });
           }
         }
 
