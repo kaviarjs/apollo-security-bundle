@@ -1,6 +1,6 @@
 {
   "name": "@kaviar/apollo-security-bundle",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Get access to currently logged in users through GraphQL context",
   "main": "dist/index.js",
   "repository": {
